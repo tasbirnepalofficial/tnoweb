@@ -35,6 +35,8 @@
   </style>
 </head>
 
+
+
 <body class="bg-white text-gray-800 overflow-x-hidden">
 
  <!-- Navbar -->
@@ -180,10 +182,18 @@
 </footer>
 
 
-  <!-- Scripts -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-  <script>
-    AOS.init();
-    </script>
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+  AOS.init();
+
+  // Toggle mobile menu visibility
+  document.getElementById('menu-btn').addEventListener('click', function () {
+    const menu = document.getElementById('mobile-menu');
+    menu.classList.toggle('hidden');
+  });
+</script>
+</body>
+
 </body>
 </html>
