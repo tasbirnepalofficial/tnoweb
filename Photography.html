@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Photography | TNO</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <link rel="stylesheet" href="sajooka.css">
+  <script src="slider.js"></script>
+  <!-- In the <head> of your HTML file -->
+<link rel="icon" type="image/png" href="logo.png">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome CDN (required for icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- AOS Animate On Scroll -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+  <style>
+    .video-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      z-index: -2;
+      object-fit: cover;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.6);
+      z-index: -1;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+    }
+
+    :root {
+      --primary: #111827;
+      --accent: #d97706;
+    }
+    body {
+      font-family: 'Outfit', sans-serif;
+    }
+    .particle-canvas {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="font-sans overflow-x-hidden">
+  
+  <!-- Navbar -->
+  <header class="bg-white shadow-lg fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <!-- Logo -->
+        <a href="TNO.html" class="flex items-center text-xl font-bold text-[var(--primary)] tracking-wide">
+          <img src="logo.png" alt="TNO Logo" class="h-8 w-auto p-1">
+          TNO<span class="text-[var(--accent)]">Studio</span>
+        </a>
+
+        <!-- Desktop Menu -->
+        <nav class="hidden md:flex space-x-8 text-[var(--primary)] font-medium">
+          <a href="TNO.html" class="hover:text-[var(--accent)] transition">Home</a>
+          <a href="#services" class="hover:text-[var(--accent)] transition">My Services</a>
+          <a href="#contact" class="hover:text-[var(--accent)] transition">Contact</a>
+        </nav>
+
+        <!-- Mobile Toggle -->
+        <div class="md:hidden">
+          <button id="menu-btn" class="focus:outline-none">
+            <i class="fas fa-bars text-2xl text-[var(--primary)]"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden hidden px-4 pt-2 pb-4 bg-white shadow">
+      <a href="TNO.html" class="block py-2 text-[var(--primary)] hover:text-[var(--accent)]">Home</a>
+      <a href="#services" class="block py-2 text-[var(--primary)] hover:text-[var(--accent)]">My Services</a>
+      <a href="#contact" class="block py-2 text-[var(--primary)] hover:text-[var(--accent)]">Contact</a>
+    </div>
+  </header>
+
+  <!-- Video Background -->
+  <video autoplay muted loop class="video-bg">
+    <source src="video.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Overlay -->
+  <div class="overlay"></div>
+
+  <!-- Main Content -->
+  <section class="content py-24 px-6 min-h-screen flex flex-col items-center" data-aos="fade-up">
+    <h1 class="text-4xl font-bold mb-8 text-center">TNO Collections</h1>
+
+    <!-- Image Grid (repeat as needed) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl w-full mb-8">
+      <div class="overflow-hidden rounded-lg shadow-lg" data-aos="zoom-in">
+        <img src="https://picsum.photos/id/1018/600/400" class="w-full hover:scale-105 transition-transform duration-300" alt="Photo 1" />
+      </div>
+      <div class="overflow-hidden rounded-lg shadow-lg" data-aos="zoom-in" data-aos-delay="100">
+        <img src="https://picsum.photos/id/1015/600/400" class="w-full hover:scale-105 transition-transform duration-300" alt="Photo 2" />
+      </div>
+      <div class="overflow-hidden rounded-lg shadow-lg" data-aos="zoom-in" data-aos-delay="200">
+        <img src="https://picsum.photos/id/1016/600/400" class="w-full hover:scale-105 transition-transform duration-300" alt="Photo 3" />
+      </div>
+      <div class="overflow-hidden rounded-lg shadow-lg" data-aos="zoom-in" data-aos-delay="100">
+        <img src="https://picsum.photos/id/1015/600/400" class="w-full hover:scale-105 transition-transform duration-300" alt="Photo 2" />
+      </div>
+      <div class="overflow-hidden rounded-lg shadow-lg" data-aos="zoom-in" data-aos-delay="200">
+        <img src="https://picsum.photos/id/1016/600/400" class="w-full hover:scale-105 transition-transform duration-300" alt="Photo 3" />
+      </div>
+      <div class="overflow-hidden rounded-lg shadow-lg" data-aos="zoom-in" data-aos-delay="100">
+        <img src="https://picsum.photos/id/1015/600/400" class="w-full hover:scale-105 transition-transform duration-300" alt="Photo 2" />
+      </div>
+      <div class="overflow-hidden rounded-lg shadow-lg" data-aos="zoom-in" data-aos-delay="200">
+        <img src="https://picsum.photos/id/1016/600/400" class="w-full hover:scale-105 transition-transform duration-300" alt="Photo 3" />
+      </div>
+      <div class="overflow-hidden rounded-lg shadow-lg" data-aos="zoom-in" data-aos-delay="100">
+        <img src="https://picsum.photos/id/1015/600/400" class="w-full hover:scale-105 transition-transform duration-300" alt="Photo 2" />
+      </div>
+      <div class="overflow-hidden rounded-lg shadow-lg" data-aos="zoom-in" data-aos-delay="200">
+        <img src="https://picsum.photos/id/1016/600/400" class="w-full hover:scale-105 transition-transform duration-300" alt="Photo 3" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 text-white py-10 px-6">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
+      
+      <!-- Logo and Tagline -->
+      <div class="text-center md:text-left">
+        <h2 class="text-2xl font-bold">Tasbir Nepal Official</h2>
+        <p class="text-sm text-gray-300 mt-1">&copy; 2025 All rights reserved</p>
+      </div>
+
+      <!-- Navigation Links -->
+      <div class="hidden sm:flex gap-6 text-sm text-white font-medium">
+        <a href="TNO.html" class="hover:text-[var(--accent)] transition">Home</a>
+        <a href="photography.html" class="hover:text-[var(--accent)] transition">Photography</a>
+        <a href="#contact" class="hover:text-[var(--accent)] transition">Contact</a>
+      </div>
+
+      <!-- Social Icons -->
+      <div class="flex space-x-4 text-2xl text-white">
+        <a href="https://www.facebook.com/share/1BwSsS3ncc/" target="_blank" class="hover:text-[var(--accent)] transition"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/tasbirnepalofficial?igsh=djJnbTZsejNxZ3F5" target="_blank" class="hover:text-[var(--accent)] transition"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.tiktok.com/@tasbirnepalofficial?_t=ZS-8w7uEMCsdN9&_r=1" target="_blank" class="hover:text-[var(--accent)] transition"><i class="fab fa-tiktok"></i></a>
+        <a href="https://www.youtube.com/@TasbirNepalOfficial" target="_blank" class="hover:text-[var(--accent)] transition"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.linkedin.com/in/tasbir-nepalofficial-b42b6134b" target="_blank" class="hover:text-[var(--accent)] transition"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- AOS Init -->
+  <script>
+    AOS.init();
+  </script>
+</body>
+</html>

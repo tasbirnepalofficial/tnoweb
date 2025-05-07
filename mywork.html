@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tasbir Nepal Official</title>
+  
+  <!-- Fonts, Icons, and Styles -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <link rel="stylesheet" href="sajooka.css">
+  <script src="slider.js"></script>
+  <link rel="icon" type="image/png" href="logo.png">
+
+  <style>
+    :root {
+      --primary: #111827;
+      --accent: #d97706;
+    }
+    body {
+      font-family: 'Outfit', sans-serif;
+    }
+    .particle-canvas {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+
+<body class="bg-white text-gray-800 overflow-x-hidden">
+
+  <!-- Navbar -->
+  <header class="bg-white shadow-lg fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <!-- Logo -->
+        <a href="TNO.html" class="flex items-center text-xl font-bold text-[var(--primary)] tracking-wide">
+          <img src="logo.png" alt="TNO Logo" class="h-8 w-auto p-1">
+          TNO<span class="text-[var(--accent)]">Studio</span>
+        </a>
+
+        <!-- Desktop Menu -->
+        <nav class="hidden md:flex space-x-8 text-[var(--primary)] font-medium">
+          <a href="TNO.html" class="hover:text-[var(--accent)] transition">Home</a>
+          <a href="#services" class="hover:text-[var(--accent)] transition">My Services</a>
+          <a href="#contact" class="hover:text-[var(--accent)] transition">Contact</a>
+        </nav>
+
+        <!-- Mobile Toggle -->
+        <div class="md:hidden">
+          <button id="menu-btn" class="focus:outline-none">
+            <i class="fas fa-bars text-2xl text-[var(--primary)]"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden hidden px-4 pt-2 pb-4 bg-white shadow">
+      <a href="TNO.html" class="block py-2 text-[var(--primary)] hover:text-[var(--accent)]">Home</a>
+      <a href="#services" class="block py-2 text-[var(--primary)] hover:text-[var(--accent)]">My Services</a>
+      <a href="#contact" class="block py-2 text-[var(--primary)] hover:text-[var(--accent)]">Contact</a>
+    </div>
+  </header>
+  

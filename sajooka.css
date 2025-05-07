@@ -1,0 +1,39 @@
+:root {
+   
+    --primary: #d97706;
+    --accent: #111827;
+  
+  }
+  
+  body {
+    font-family: 'Outfit', sans-serif;
+  }
+  
+  /* Particle canvas was removed in this version */
+  
+  /* Background slider keyframes */
+  @keyframes fadeSlide {
+    0%, 100% { opacity: 0; }
+    8%, 33% { opacity: 1; }
+  }
+  
+  .animate-fadeSlide {
+    animation: fadeSlide 24s infinite;
+  }
+  
+  .particle-canvas {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  
+  .slide {
+    transition: opacity 1s ease-in-out;
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+  }
+  
