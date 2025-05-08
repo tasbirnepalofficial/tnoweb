@@ -51,9 +51,10 @@
 
       <!-- Desktop Menu -->
       <nav class="hidden md:flex space-x-8 text-[var(--primary)] font-medium">
+        <a href="#about" class="hover:text-[var(--accent)] transition">About</a>
         <a href="index.html" class="hover:text-[var(--accent)] transition">Home</a>
-        <a href="index.html#services" class="hover:text-[var(--accent)] transition">Services</a>
-        <a href="index.html#contact" class="hover:text-[var(--accent)] transition">Contact</a>
+        <a href="#services" class="hover:text-[var(--accent)] transition">Services</a>
+        <a href="#contact" class="hover:text-[var(--accent)] transition">Contact</a>
       </nav>
 
       <!-- Mobile Toggle -->
@@ -67,11 +68,13 @@
 
   <!-- Mobile Menu -->
   <div id="mobile-menu" class="md:hidden hidden px-4 pt-2 pb-4 bg-white shadow">
+    <a href="#about" class="block py-2 text-[var(--primary)] hover:text-[var(--accent)]">About</a>
     <a href="index.html" class="block py-2 text-[var(--primary)] hover:text-[var(--accent)]">Home</a>
-    <a href="#services" class="block py-2 text-[var(--primary)] hover:text-[var(--accent)]">Services</a>
-    <a href="#contact" class="block py-2 text-[var(--primary)] hover:text-[var(--accent)]">Contact</a>
+    <a href="index.html#services" class="block py-2 text-[var(--primary)] hover:text-[var(--accent)]">Services</a>
+    <a href="index.html#contact" class="block py-2 text-[var(--primary)] hover:text-[var(--accent)]">Contact</a>
   </div>
 </header>
+
 
   <!-- Hero Section -->
   <div class="relative h-fit sm:min-h-screen overflow-hidden text-white pt-16" id="hero">
@@ -95,54 +98,22 @@
     </div>
   </div>
 
-  <!-- Services -->
-  <main id="services" class="py-20 bg-white">
+  <!-- About -->
+<main id="about" class="py-20 bg-white">
     <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center mb-12 text-[var(--primary)]">Services</h2>
-      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
+      <h2 class="text-3xl font-bold text-center mb-12 text-[var(--primary)]">About</h2>
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8 place-items-center">
         <!-- Service Cards -->
-        <a href="Photography.html" class="bg-white rounded-lg shadow-lg hover:shadow-2xl p-6 text-center transition" data-aos="zoom-in">
+        <a href="#samipkhadka" class="bg-white rounded-lg shadow-lg hover:shadow-2xl p-6 text-center transition" data-aos="zoom-in"data-aos-delay="200">
           <i class="fas fa-camera text-3xl text-[var(--accent)] mb-4"></i>
-          <h3 class="text-lg font-semibold mb-2">Photography & Videography</h3>
-          <p class="text-gray-600 text-sm">Weddings, portraits & events professionally captured.</p>
-        </a>
-
-        <a href="musicproduction.html" class="bg-white rounded-lg shadow-lg hover:shadow-2xl p-6 text-center transition" data-aos="zoom-in" data-aos-delay="200">
-          <i class="fas fa-music text-3xl text-[var(--accent)] mb-4"></i>
-          <h3 class="text-lg font-semibold mb-2">Music Production</h3>
-          <p class="text-gray-600 text-sm">Custom beats, soundtracks & professional mixing.</p>
-        </a>
-
-        <a href="design&editing.html" class="bg-white rounded-lg shadow-lg hover:shadow-2xl p-6 text-center transition" data-aos="zoom-in" data-aos-delay="300">
-          <i class="fas fa-pencil-ruler text-3xl text-[var(--accent)] mb-4"></i>
-          <h3 class="text-lg font-semibold mb-2">Design & Editing</h3>
-          <p class="text-gray-600 text-sm">Post-processing, graphics & digital content editing.</p>
+          <h3 class="text-lg font-semibold mb-2">SAMIP KHADKA</h3>
+          <p class="text-gray-600 text-sm">FOUNDER & CEO.</p>
         </a>
       </div>
     </div>
   </main>
+  
 
-  <!-- Contact -->
-  <section id="contact" class="py-20 bg-yellow-50">
-    <div class="max-w-4xl mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center text-[var(--primary)] mb-12">Let's Connect</h2>
-      <form action="https://formsubmit.co/tasbirnepalofficial@gmail.com" method="POST" class="bg-white rounded-lg p-8 shadow-lg space-y-6">
-        <div>
-          <label for="name" class="block text-sm font-medium mb-1">Name</label>
-          <input id="name" name="name" type="text" required class="w-full px-4 py-3 border rounded focus:ring-2 focus:ring-yellow-400" placeholder="Your Name">
-        </div>
-        <div>
-          <label for="email" class="block text-sm font-medium mb-1">Email</label>
-          <input id="email" name="email" type="email" required class="w-full px-4 py-3 border rounded focus:ring-2 focus:ring-yellow-400" placeholder="Your Email">
-        </div>
-        <div>
-          <label for="message" class="block text-sm font-medium mb-1">Message</label>
-          <textarea id="message" name="message" rows="5" required class="w-full px-4 py-3 border rounded focus:ring-2 focus:ring-yellow-400" placeholder="Your Message"></textarea>
-        </div>
-        <button type="submit" class="bg-[var(--primary)] text-white px-6 py-3 rounded hover:bg-black transition">Send</button>
-      </form>
-    </div>
-  </section>
 
   <!-- Footer -->
 <footer class="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 text-white py-10 px-6">
@@ -163,10 +134,8 @@
     <!-- Navigation Links -->
 <div class="hidden sm:flex gap-6 text-sm text-white font-bold">
   <a href="index.html" class="hover:text-[var(--accent)] transition">Home</a>
-  <a href="#services" class="hover:text-[var(--accent)] transition">Services</a>
-  <a href="#contact" class="hover:text-[var(--accent)] transition">Contact</a>
-  <a href="about.html#about" class="hover:text-[var(--accent)] transition">About</a>
-  
+  <a href="index.html#services" class="hover:text-[var(--accent)] transition">Services</a>
+  <a href="index.html#contact" class="hover:text-[var(--accent)] transition">Contact</a>
 </div>
 
 
