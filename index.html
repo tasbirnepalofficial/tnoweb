@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tasbir Nepal Official</title>
+  <title>TNO Studio</title>
   
   <!-- Fonts, Icons, and Styles -->
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
@@ -75,14 +75,17 @@
 </header>
 
   <!-- Hero Section -->
-  <div class="relative h-fit sm:min-h-screen overflow-hidden text-white pt-16" id="hero">
-    <!-- Background Slides -->
-    <div class="absolute inset-0 z-0">
-      <div class="slide bg-cover bg-center absolute inset-0 transition-opacity duration-1000 opacity-100" style="background-image: url('https://th.bing.com/th/id/R.55826dbfca36ea997b42a3ffdf1ea67a?rik=tUObfQzgpHHKZA&pid=ImgRaw&r=0');"></div>
-      <div class="slide bg-cover bg-center absolute inset-0 transition-opacity duration-1000 opacity-0" style="background-image: url('https://th.bing.com/th/id/R.f48ceff9ab3322d4e84ed12a44c484d1?rik=0KQ6OgL4T%2b9uCA&riu=http%3a%2f%2fwww.photo-paysage.com%2falbums%2fuserpics%2f10001%2fCascade_-15.JPG&ehk=kx1JjE9ugj%2bZvUIrjzSmcnslPc7NE1cOnZdra%2f3pJEM%3d&risl=1&pid=ImgRaw&r=0');"></div>
-      <div class="slide bg-cover bg-center absolute inset-0 transition-opacity duration-1000 opacity-0" style="background-image: url('https://img.freepik.com/photos-premium/bateau-lac-montagnes-arriere-plan_865967-5725.jpg');"></div>
-      <div class="absolute inset-0 bg-black bg-opacity-60"></div>
-    </div>
+<div class="relative h-fit sm:min-h-screen overflow-hidden text-white pt-16" id="hero">
+  <!-- Background Slides -->
+  <div class="absolute inset-0 z-0">
+    <div class="slide bg-cover bg-center absolute inset-0 transition-opacity duration-1000 opacity-100" style="background-image: url('phot 01.jpg');"></div>
+    <div class="slide bg-cover bg-center absolute inset-0 transition-opacity duration-1000 opacity-0" style="background-image: url('photo 02.jpg');"></div>
+    <div class="slide bg-cover bg-center absolute inset-0 transition-opacity duration-1000 opacity-0" style="background-image: url('photo 03.jpg');"></div>
+    <div class="slide bg-cover bg-center absolute inset-0 transition-opacity duration-1000 opacity-0" style="background-image: url('photo 04.jpg');"></div>
+    <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+  </div>
+
+
 
     <!-- Hero Content -->
     <div class="relative z-10 flex flex-col items-center justify-center text-center h-fit sm:min-h-screen px-4 py-16 sm:py-0" data-aos="fade-up">
@@ -214,6 +217,28 @@
     const menu = document.getElementById('mobile-menu');
     menu.classList.toggle('hidden');
   });
+
+
+
+
+
+   let currentSlide = 0;
+  const slides = document.querySelectorAll('#hero .slide');
+  const totalSlides = slides.length;
+
+  function changeSlide() {
+    slides[currentSlide].classList.remove('opacity-100');
+    slides[currentSlide].classList.add('opacity-0');
+
+    currentSlide = (currentSlide + 1) % totalSlides;
+
+    slides[currentSlide].classList.remove('opacity-0');
+    slides[currentSlide].classList.add('opacity-100');
+  }
+
+  setInterval(changeSlide, 3000); // 3 seconds
+
+
 </script>
 </body>
 
