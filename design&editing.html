@@ -2,185 +2,263 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Design & Editing | TNO</title>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <link rel="stylesheet" href="sajooka.css">
-  <script src="slider.js"></script>
-  <!-- In the <head> of your HTML file -->
-<link rel="icon" type="image/png" href="logo.png">
-
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Font Awesome CDN (required for icons) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Design & Editing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
-  <!-- AOS Animate On Scroll -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="stylesheet" href="styles.css" />
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap');
+
+    body {
+      font-family: 'Outfit', sans-serif;
+    }
+
     .video-bg {
       position: fixed;
       top: 0;
       left: 0;
-      min-width: 100%;
-      min-height: 100%;
-      z-index: -2;
+      width: 100vw;
+      height: 100vh;
       object-fit: cover;
+      z-index: -2;
     }
 
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.6);
-      z-index: -1;
+    @media (prefers-reduced-motion: reduce) {
+      video {
+        animation: none !important;
+      }
     }
 
-    .content {
-      position: relative;
-      z-index: 1;
-    }
-
-    :root {
-      --primary: #111827;
-      --accent: #d97706;
-    }
-    body {
-      font-family: 'Outfit', sans-serif;
-    }
-    .particle-canvas {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
+    /* Optional subtle hover effect on cards */
+    section div:hover {
+      transform: translateY(-8px);
+      transition: transform 0.3s ease;
     }
   </style>
 </head>
-<body class="font-sans overflow-x-hidden">
-  
- <!-- Navbar -->
- <header class="bg-white shadow-lg fixed top-0 left-0 right-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-16">
-        <!-- Logo -->
-        <a href="index.html" class="flex items-center text-xl font-bold text-[var(--primary)] tracking-wide">
-          <img src="logo.png" alt="TNO Logo" class="h-8 w-auto p-1">
-          TNO<span class="text-[var(--accent)]">Studio</span>
-        </a>
+<body class="font-outfit overflow-x-hidden bg-gray-50 relative">
 
-        <!-- Desktop Menu -->
-        <nav class="hidden md:flex space-x-8 text-[var(--primary)] font-medium">
-          <a href="index.html" class="hover:text-[var(--accent)] transition">Home</a>
-          <a href="index.html#services" class="hover:text-[var(--accent)] transition">Services</a>
-          <a href="index.html#contact" class="hover:text-[var(--accent)] transition">Contact</a>
-        </nav>
+  <!-- Navbar -->
+  <header class="fixed w-full bg-white shadow-md z-50">
+    <div class="max-w-7xl mx-auto px-6 flex justify-between items-center h-16">
+      <a href="index.html" class="flex items-center gap-2 text-2xl font-bold text-gray-900">
+        <img src="logo.png" alt="TNO Logo" class="h-8 w-auto" />
+        TNO<span class="text-yellow-600">Studio</span>
+      </a>
 
-        <!-- Mobile Toggle -->
-        <div class="md:hidden">
-          <button id="menu-btn" class="focus:outline-none">
-            <i class="fas fa-bars text-2xl text-[var(--primary)]"></i>
-          </button>
-        </div>
-      </div>
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex space-x-10 text-gray-800 font-semibold">
+        <a href="index.html" class="hover:text-yellow-600 transition">Home</a>
+        <a href="index.html#services" class="hover:text-yellow-600 transition">Services</a>
+        <a href="index.html#contact" class="hover:text-yellow-600 transition">Contact</a>
+      </nav>
+
+      <!-- Mobile menu button -->
+      <button id="menu-btn" aria-label="Toggle Menu" class="md:hidden text-3xl text-gray-900 focus:outline-none">
+        <i class="fas fa-bars"></i>
+      </button>
     </div>
 
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="md:hidden hidden px-4 pt-2 pb-4 bg-white shadow">
-      <a href="index.html" class="block py-2 text-[var(--primary)] hover:text-[var(--accent)]">Home</a>
-      <a href="#services" class="block py-2 text-[var(--primary)] hover:text-[var(--accent)]">Services</a>
-      <a href="#contact" class="block py-2 text-[var(--primary)] hover:text-[var(--accent)]">Contact</a>
-    </div>
+    <!-- Mobile menu -->
+    <nav id="mobile-menu" class="hidden md:hidden bg-white shadow-lg px-6 py-4 space-y-3">
+      <a href="index.html" class="block text-gray-900 font-medium hover:text-yellow-600 transition">Home</a>
+      <a href="index.html#services" class="block text-gray-900 font-medium hover:text-yellow-600 transition">Services</a>
+      <a href="index.html#contact" class="block text-gray-900 font-medium hover:text-yellow-600 transition">Contact</a>
+    </nav>
   </header>
-  <!-- Video Background -->
-  <video autoplay muted loop class="video-bg">
-    <source src=".......mp4" type="video/mp4" />
-    Your browser does not support the video tag.
+
+  <!-- Video background -->
+  <video autoplay muted loop playsinline class="video-bg object-cover fixed inset-0 z-[-2]">
+    <source src="your-video.mp4" type="video/mp4" />
+    Sorry, your browser doesn't support the video tag.
   </video>
 
   <!-- Overlay -->
-  <div class="overlay"></div>
+  <div class="fixed inset-0 bg-white bg-opacity-60 z-[-1]"></div>
 
-  <!-- Main Content -->
-<section class="content py-24 px-6 min-h-screen flex flex-col items-center" data-aos="fade-up">
-    <h1 class="text-4xl font-bold mb-8 text-center">TNO Design & Editing</h1>
-  
-    <!-- Design Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl w-full mb-8">
-      <div class="overflow-hidden rounded-lg shadow-lg bg-white p-4" data-aos="zoom-in">
-        <img src="design pic.png" class="w-full hover:scale-105 transition-transform duration-300" alt="Poster Design Example" />
-        <h2 class="mt-3 font-semibold text-lg text-center">Post Design</h2>
-      </div>
-      <div class="overflow-hidden rounded-lg shadow-lg bg-white p-4" data-aos="zoom-in" data-aos-delay="100">
-        <img src="https://via.placeholder.com/600x400?text=Social+Media+Banner" class="w-full hover:scale-105 transition-transform duration-300" alt="Social Media Banner" />
-        <h2 class="mt-3 font-semibold text-lg text-center">Instagram Banner</h2>
-      </div>
-      <div class="overflow-hidden rounded-lg shadow-lg bg-white p-4" data-aos="zoom-in" data-aos-delay="200">
-        <img src="https://via.placeholder.com/600x400?text=Photo+Retouching" class="w-full hover:scale-105 transition-transform duration-300" alt="Photo Retouching Sample" />
-        <h2 class="mt-3 font-semibold text-lg text-center">Photo Retouching</h2>
-      </div>
-      <div class="overflow-hidden rounded-lg shadow-lg bg-white p-4" data-aos="zoom-in" data-aos-delay="300">
-        <img src="https://via.placeholder.com/600x400?text=Before+After" class="w-full hover:scale-105 transition-transform duration-300" alt="Before After Editing" />
-        <h2 class="mt-3 font-semibold text-lg text-center">Before & After Editing</h2>
-      </div>
-      <div class="overflow-hidden rounded-lg shadow-lg bg-white p-4" data-aos="zoom-in" data-aos-delay="400">
-        <img src="https://via.placeholder.com/600x400?text=Logo+Design" class="w-full hover:scale-105 transition-transform duration-300" alt="Logo Design Sample" />
-        <h2 class="mt-3 font-semibold text-lg text-center">Logo Design</h2>
-      </div>
-      <div class="overflow-hidden rounded-lg shadow-lg bg-white p-4" data-aos="zoom-in" data-aos-delay="500">
-        <img src="https://via.placeholder.com/600x400?text=Magazine+Layout" class="w-full hover:scale-105 transition-transform duration-300" alt="Magazine Layout" />
-        <h2 class="mt-3 font-semibold text-lg text-center">Magazine Layout</h2>
-      </div>
-    </div>
-  </section>
-  
+  <!-- Main content -->
+  <main class="relative z-10 py-28 px-6 max-w-7xl mx-auto" data-aos="fade-up">
+    <h1 class="text-5xl font-extrabold mb-12 text-center text-gray-900">Design & Editing</h1>
 
- <!-- Footer -->
+    <!-- New Section: Why Choose Us -->
+    <section class="max-w-5xl mx-auto my-16 px-6">
+      <h2 class="text-3xl font-bold text-center mb-10 text-gray-900" data-aos="fade-up">
+        Why Choose <span class="text-yellow-600">TNO Studio?</span>
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12">
+        <div class="bg-white rounded-xl p-8 shadow-lg text-center hover:shadow-2xl transition-shadow" data-aos="fade-up" data-aos-delay="100">
+          <i class="fas fa-paint-brush text-yellow-500 text-5xl mb-4"></i>
+          <h3 class="text-xl font-semibold mb-2">Creative Designs</h3>
+          <p class="text-gray-600">Unique and tailor-made designs crafted to bring your vision to life with flair and precision.</p>
+        </div>
+
+<div class="bg-white rounded-xl p-8 shadow-lg text-center hover:shadow-2xl transition-shadow" data-aos="fade-up" data-aos-delay="200">
+ <i class="fas fa-shapes text-yellow-500 text-5xl mb-4"></i>
+
+  <h3 class="text-xl font-semibold mb-2">Logo Designs</h3>
+  <p class="text-gray-600">We value your time and deliver high-quality edits and designs swiftly without compromising quality.</p>
+</div>
+
+
+<div class="bg-white rounded-xl p-8 shadow-lg text-center hover:shadow-2xl transition-shadow" data-aos="fade-up" data-aos-delay="300">
+  <i class="fas fa-users text-yellow-500 text-5xl mb-4"></i>
+  <h3 class="text-xl font-semibold mb-2">Magazines</h3>
+  <p class="text-gray-600">Our process is collaborative, ensuring your ideas and feedback shape the final masterpiece.</p>
+</div>
+
+      </div>
+    </section>
+
+  <!-- Design grid -->
+      <main class="relative z-10 py-28 px-6 max-w-7xl mx-auto" data-aos="fade-up">
+    <h1 class="text-5xl font-extrabold mb-12 text-center text-gray-900">Creative Designs</h1>
+    <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      <!-- Card -->
+      <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow" data-aos="zoom-in">
+        <img src="" alt="Poster Design Example" class="w-full object-cover hover:scale-105 transition-transform duration-300" />
+        <h2 class="text-center text-xl font-semibold py-4">Post 01</h2>
+      </article>
+
+      <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow" data-aos="zoom-in" data-aos-delay="100">
+        <img src="https://via.placeholder.com/600x400?text=Social+Media+Banner" alt="Social Media Banner" class="w-full object-cover hover:scale-105 transition-transform duration-300" />
+        <h2 class="text-center text-xl font-semibold py-4">Post 02</h2>
+      </article>
+
+      <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow" data-aos="zoom-in" data-aos-delay="200">
+        <img src="https://via.placeholder.com/600x400?text=Photo+Retouching" alt="Photo Retouching Sample" class="w-full object-cover hover:scale-105 transition-transform duration-300" />
+        <h2 class="text-center text-xl font-semibold py-4">Post 03</h2>
+      </article>
+
+      <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow" data-aos="zoom-in" data-aos-delay="300">
+        <img src="https://via.placeholder.com/600x400?text=Before+After" alt="Before After Editing" class="w-full object-cover hover:scale-105 transition-transform duration-300" />
+        <h2 class="text-center text-xl font-semibold py-4">POst 04</h2>
+      </article>
+
+      <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow" data-aos="zoom-in" data-aos-delay="400">
+        <img src="https://via.placeholder.com/600x400?text=Logo+Design" alt="Logo Design Sample" class="w-full object-cover hover:scale-105 transition-transform duration-300" />
+        <h2 class="text-center text-xl font-semibold py-4">Post 05</h2>
+      </article>
+
+      <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow" data-aos="zoom-in" data-aos-delay="500">
+        <img src="https://via.placeholder.com/600x400?text=Magazine+Layout" alt="Magazine Layout" class="w-full object-cover hover:scale-105 transition-transform duration-300" />
+        <h2 class="text-center text-xl font-semibold py-4">Post 06</h2>
+      </article>
+    </section>
+  </main>
+
+
+  <!-- Design grid -->
+      <main class="relative z-10 py-28 px-6 max-w-7xl mx-auto" data-aos="fade-up">
+    <h1 class="text-5xl font-extrabold mb-12 text-center text-gray-900">Logo Designs</h1>
+    <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      <!-- Card -->
+      <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow" data-aos="zoom-in">
+        <img src="" alt="Poster Design Example" class="w-full object-cover hover:scale-105 transition-transform duration-300" />
+        <h2 class="text-center text-xl font-semibold py-4">Post 01</h2>
+      </article>
+
+      <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow" data-aos="zoom-in" data-aos-delay="100">
+        <img src="https://via.placeholder.com/600x400?text=Social+Media+Banner" alt="Social Media Banner" class="w-full object-cover hover:scale-105 transition-transform duration-300" />
+        <h2 class="text-center text-xl font-semibold py-4">Post 02</h2>
+      </article>
+
+      <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow" data-aos="zoom-in" data-aos-delay="200">
+        <img src="https://via.placeholder.com/600x400?text=Photo+Retouching" alt="Photo Retouching Sample" class="w-full object-cover hover:scale-105 transition-transform duration-300" />
+        <h2 class="text-center text-xl font-semibold py-4">Post 03</h2>
+      </article>
+
+      <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow" data-aos="zoom-in" data-aos-delay="300">
+        <img src="https://via.placeholder.com/600x400?text=Before+After" alt="Before After Editing" class="w-full object-cover hover:scale-105 transition-transform duration-300" />
+        <h2 class="text-center text-xl font-semibold py-4">POst 04</h2>
+      </article>
+
+      <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow" data-aos="zoom-in" data-aos-delay="400">
+        <img src="https://via.placeholder.com/600x400?text=Logo+Design" alt="Logo Design Sample" class="w-full object-cover hover:scale-105 transition-transform duration-300" />
+        <h2 class="text-center text-xl font-semibold py-4">Post 05</h2>
+      </article>
+
+      <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow" data-aos="zoom-in" data-aos-delay="500">
+        <img src="https://via.placeholder.com/600x400?text=Magazine+Layout" alt="Magazine Layout" class="w-full object-cover hover:scale-105 transition-transform duration-300" />
+        <h2 class="text-center text-xl font-semibold py-4">Post 06</h2>
+      </article>
+    </section>
+  </main>
+
+    <!-- Design grid -->
+      <main class="relative z-10 py-28 px-6 max-w-7xl mx-auto" data-aos="fade-up">
+    <h1 class="text-5xl font-extrabold mb-12 text-center text-gray-900">Magazines</h1>
+    <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      <!-- Card -->
+      <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow" data-aos="zoom-in">
+        <img src="" alt="Poster Design Example" class="w-full object-cover hover:scale-105 transition-transform duration-300" />
+        <h2 class="text-center text-xl font-semibold py-4">Post 01</h2>
+      </article>
+
+      <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow" data-aos="zoom-in" data-aos-delay="100">
+        <img src="https://via.placeholder.com/600x400?text=Social+Media+Banner" alt="Social Media Banner" class="w-full object-cover hover:scale-105 transition-transform duration-300" />
+        <h2 class="text-center text-xl font-semibold py-4">Post 02</h2>
+      </article>
+
+      <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow" data-aos="zoom-in" data-aos-delay="200">
+        <img src="https://via.placeholder.com/600x400?text=Photo+Retouching" alt="Photo Retouching Sample" class="w-full object-cover hover:scale-105 transition-transform duration-300" />
+        <h2 class="text-center text-xl font-semibold py-4">Post 03</h2>
+      </article>
+
+      <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow" data-aos="zoom-in" data-aos-delay="300">
+        <img src="https://via.placeholder.com/600x400?text=Before+After" alt="Before After Editing" class="w-full object-cover hover:scale-105 transition-transform duration-300" />
+        <h2 class="text-center text-xl font-semibold py-4">POst 04</h2>
+      </article>
+
+      <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow" data-aos="zoom-in" data-aos-delay="400">
+        <img src="https://via.placeholder.com/600x400?text=Logo+Design" alt="Logo Design Sample" class="w-full object-cover hover:scale-105 transition-transform duration-300" />
+        <h2 class="text-center text-xl font-semibold py-4">Post 05</h2>
+      </article>
+
+      <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow" data-aos="zoom-in" data-aos-delay="500">
+        <img src="https://via.placeholder.com/600x400?text=Magazine+Layout" alt="Magazine Layout" class="w-full object-cover hover:scale-105 transition-transform duration-300" />
+        <h2 class="text-center text-xl font-semibold py-4">Post 06</h2>
+      </article>
+    </section>
+  </main>
+
+
+<!-- Footer -->
 <footer class="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 text-white py-10 px-6">
   <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
-    
-    <!-- Logo and Tagline -->
-<div class="flex items-center space-x-3 text-center md:text-left">
-  <div class="bg-white rounded-full p-2 h-12 w-12 flex items-center justify-center">
-    <img src="logo.png" alt="TNO Logo" class="h-8 w-8 object-contain">
-  </div>
-  <div>
-    <h2 class="text-2xl font-bold">Tasbir Nepal Official</h2>
-    <p class="text-sm text-white mt-1">&copy; 2025 All rights reserved</p>
-  </div>
-</div>
-
-
-    <!-- Navigation Links -->
-<div class="hidden sm:flex gap-6 text-sm text-white font-bold">
-  <a href="index.html" class="hover:text-[var(--accent)] transition">Home</a>
-  <a href="photography.html" class="hover:text-[var(--accent)] transition">Photography</a>
-  <a href="#contact" class="hover:text-[var(--accent)] transition">Contact</a>
-</div>
-
-
-    <!-- Social Icons -->
-    <div class="flex space-x-4 text-2xl text-white">
-      <a href="https://facebook.com" target="_blank" class="hover:text-[var(--accent)] transition"><i class="fab fa-facebook-f"></i></a>
-      <a href="https://instagram.com" target="_blank" class="hover:text-[var(--accent)] transition"><i class="fab fa-instagram"></i></a>
-      <a href="https://www.tiktok.com/@tasbirnepalofficial?is_from_webapp=1&sender_device=pc" target="_blank" class="hover:text-[var(--accent)] transition"><i class="fab fa-tiktok"></i></a>
-      <a href="https://youtube.com" target="_blank" class="hover:text-[var(--accent)] transition"><i class="fab fa-youtube"></i></a>
-      <a href="https://linkedin.com" target="_blank" class="hover:text-[var(--accent)] transition"><i class="fab fa-linkedin"></i></a>
+    <div class="flex items-center space-x-3">
+      <img src="logo.png" alt="TNO Logo" class="h-10 w-10 rounded-full bg-white p-1">
+      <div>
+        <h2 class="text-2xl font-bold">Tasbir Nepal Official</h2>
+        <p class="text-sm">&copy; 2025 All rights reserved</p>
+      </div>
     </div>
-    
+    <div class="flex space-x-4 text-2xl">
+      <a href="#" class="hover:text-black transition"><i class="fab fa-facebook"></i></a>
+      <a href="#" class="hover:text-black transition"><i class="fab fa-instagram"></i></a>
+      <a href="#" class="hover:text-black transition"><i class="fab fa-youtube"></i></a>
+      <a href="#" class="hover:text-black transition"><i class="fab fa-linkedin"></i></a>
+    </div>
   </div>
 </footer>
-  <!-- AOS Init -->
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script>
     AOS.init();
+
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      menuBtn.querySelector('i').classList.toggle('fa-bars');
+      menuBtn.querySelector('i').classList.toggle('fa-times');
+    });
   </script>
 </body>
 </html>

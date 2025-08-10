@@ -56,6 +56,53 @@
       pointer-events: none;
     }
 
+    :root {
+    --primary: #0f1724;
+    --accent: #d97706;
+    --muted: #6b7280;
+  }
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: #f8fafc;
+    color: var(--primary);
+  }
+
+  /* Blurred Background Image */
+  .bg-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -3;
+    background: url('music bg pic.jpg') center/cover no-repeat;
+    filter: blur(6px) brightness(0.6);
+  }
+
+  /* Video background */
+  .video-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -2;
+    object-fit: cover;
+    filter: brightness(0.55);
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.35), rgba(255,255,255,0.65));
+    z-index: -1;
+    pointer-events: none;
+  }
+
+
     .content {
       position: relative;
       z-index: 1;
@@ -94,6 +141,17 @@
   </video>
 
   <div class="overlay"></div>
+<!-- Blurred Background Image -->
+<div class="bg-image"></div>
+
+<!-- Video Background (optional, can remove if only image is needed) -->
+<video autoplay muted loop class="video-bg">
+  <source src="video/background.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+<!-- Overlay -->
+<div class="overlay"></div>
 
   <!-- Navbar -->
   <header class="bg-white/80 backdrop-blur-md shadow-md fixed top-0 left-0 right-0 z-50">
@@ -136,11 +194,11 @@
     <!-- Hero -->
     <section class="py-12 px-6 text-center">
       <div class="max-w-4xl mx-auto">
-        <h1 class="text-4xl md:text-5xl font-extrabold mb-4 text-red-500 shadow-[2px_2px_8px_rgba(0,0,0,0.9)]">
-  Inspire. Learn. Achieve.
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-4 text-red-500 shadow-1g">
+  Feel. Create. Perform. 🎵
 </h1>
 
-        <p class="text-lg md:text-xl text-black/90 mb-6 max-w-3xl mx-auto">At <span class="font-semibold">Polar / Tasbir Nepal Official</span>, we nurture ambitions — whether your child dreams of engineering, art, entrepreneurship, or music production. Explore our signature programs designed to spark curiosity & build real skills.</p>
+        <p class="text-lg md:text-xl text-black/90 mb-6 max-w-3xl mx-auto">At <span class="font-semibold">Tasbir Nepal Official</span>, we nurture ambitions — whether your child dreams of engineering, art, entrepreneurship, or music production. Explore our signature programs designed to spark curiosity & build real skills.</p>
 
         <div class="flex justify-center gap-4">
           <a href="#programs" class="inline-flex items-center gap-2 bg-[var(--accent)] text-white px-5 py-3 rounded-2xl font-semibold shadow-lg hover:brightness-95 transition">
@@ -155,7 +213,7 @@
 
     <!-- Music Production Section (your existing content) -->
     <section class="py-8 px-6 min-h-[40vh]">
-      <div class="max-w-6xl mx-auto bg-white/80 rounded-2xl p-8 soft-shadow">
+      <div class="max-w-6xl mx-auto bg-white/80 rounded-2xl p-8 soft-shadow text-center" >
         <h2 class="text-3xl font-bold mb-6">Music Production</h2>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -189,15 +247,24 @@
       </div>
     </section>
 
-    <!-- Signature Programs (Best subjects) -->
-    <section id="programs" class="py-16 px-6">
-      <div class="max-w-7xl mx-auto">
-        <div class="text-center mb-10">
-          <h2 class="text-3xl md:text-4xl font-extrabold">Signature Programs</h2>
-          <p class="text-md text-[var(--muted)] mt-2 max-w-3xl mx-auto">Curated subjects that help students develop strong foundations, creative thinking, and career-ready skills. Built for curiosity, confidence, and real-world success.</p>
-        </div>
+<!-- Signature Programs (Photography & Videography) -->
+<section id="programs" class="py-16 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-10">
+      <h2 class="text-3xl md:text-4xl font-extrabold">Signature Program: Music Production</h2>
+      <p class="text-md text-[var(--muted)] mt-2 max-w-3xl mx-auto">
+       A specialized program designed to nurture music creators. Students master recording techniques, sound design, mixing, and creative composition — building skills to produce tracks that inspire and connect with audiences in the real world. 🎶
+      </p>
+    </div>
+  </div>
+</section>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+<div class="flex justify-center items-center max-h-screen">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    </div>
+
+
 
           <!-- Card: Music & Audio Production -->
           <article class="bg-white rounded-2xl p-6 soft-shadow hover:scale-[1.01] transition" data-aos="fade-up" data-aos-delay="60">
@@ -223,7 +290,7 @@
 
         <!-- Quick benefits / Why choose us -->
         <div class="mt-12 max-w-4xl mx-auto text-center text-[var(--muted)]">
-          <p><strong>Why choose these programs?</strong> Real projects • Small class sizes • Industry-aligned curriculum • Competitions & showcases</p>
+          <p><strong></strong></p>
         </div>
       </div>
     </section>
@@ -233,14 +300,14 @@
       <div class="max-w-4xl mx-auto bg-gradient-to-r from-white to-white/90 rounded-2xl p-8 soft-shadow flex flex-col md:flex-row gap-6 items-center justify-between">
         <div>
           <h3 class="text-2xl font-bold">Ready to join?</h3>
-          <p class="text-sm text-[var(--muted)] mt-1">Contact admissions to reserve a spot — scholarships are available for high performers.</p>
+          <p class="text-sm text-[var(--muted)] mt-1">Reserve your studio time to create your best tracks — make music that lasts forever. 🎵</p>
         </div>
 
         <div class="flex gap-3">
-          <a href="tel:+977-1234567890" class="inline-flex items-center gap-2 px-4 py-3 rounded-full border font-semibold">
+          <a href="phone:+977-9844610099" class="inline-flex items-center gap-2 px-4 py-3 rounded-full border font-semibold">
             <i class="fas fa-phone"></i> Call Us
           </a>
-          <a href="mailto:info@tasbirnepal.com" class="inline-flex items-center gap-2 px-4 py-3 rounded-full bg-[var(--accent)] text-white font-semibold">
+          <a href="mailto:tasbirnepalofficial@gmail.com" class="inline-flex items-center gap-2 px-4 py-3 rounded-full bg-[var(--accent)] text-white font-semibold">
             <i class="fas fa-envelope"></i> Email
           </a>
         </div>
