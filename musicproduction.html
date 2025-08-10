@@ -3,28 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Photography | TNO</title>
+  <title>TNO Studio — Music & Education</title>
+
+  <!-- Fonts & Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <link rel="stylesheet" href="sajooka.css">
-  <script src="slider.js"></script>
-  <!-- In the <head> of your HTML file -->
-<link rel="icon" type="image/png" href="logo.png">
+  <link rel="icon" type="image/png" href="logo.png">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
 
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Font Awesome CDN (required for icons) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
-  <!-- AOS Animate On Scroll -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <!-- Three.js (kept, if used later) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
   <style>
+    :root {
+      --primary: #0f1724; /* near-black */
+      --accent: #d97706;  /* amber */
+      --muted: #6b7280;
+    }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: #f8fafc;
+      color: var(--primary);
+    }
+
+    /* Video background */
     .video-bg {
       position: fixed;
       top: 0;
@@ -33,6 +42,7 @@
       min-height: 100%;
       z-index: -2;
       object-fit: cover;
+      filter: brightness(0.55);
     }
 
     .overlay {
@@ -41,8 +51,9 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(255, 255, 255, 0.6);
+      background: linear-gradient(180deg, rgba(255,255,255,0.35), rgba(255,255,255,0.65));
       z-index: -1;
+      pointer-events: none;
     }
 
     .content {
@@ -50,139 +61,252 @@
       z-index: 1;
     }
 
-    :root {
-      --primary: #111827;
-      --accent: #d97706;
+    /* Decorative card accent */
+    .card-accent {
+      height: 6px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(217,119,6,1), rgba(234,88,12,0.9));
+      margin-bottom: 0.75rem;
     }
-    body {
-      font-family: 'Outfit', sans-serif;
+
+    /* small shadow for cards */
+    .soft-shadow {
+      box-shadow: 0 8px 30px rgba(15,23,36,0.06);
     }
-    .particle-canvas {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
+
+    /* mobile menu transition */
+    .mobile-menu-open {
+      display: block !important;
+      animation: slideDown .22s ease-out;
+    }
+    @keyframes slideDown {
+      from { transform: translateY(-6px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
   </style>
 </head>
-<body class="font-sans overflow-x-hidden">
-  
+<body class="overflow-x-hidden">
+
+  <!-- Video Background (replace src with your video file) -->
+  <video autoplay muted loop class="video-bg">
+    <source src="video/background.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="overlay"></div>
+
   <!-- Navbar -->
-  <header class="bg-white shadow-lg fixed top-0 left-0 right-0 z-50">
+  <header class="bg-white/80 backdrop-blur-md shadow-md fixed top-0 left-0 right-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16">
-        <!-- Logo -->
-        <a href="index.html" class="flex items-center text-xl font-bold text-[var(--primary)] tracking-wide">
-          <img src="logo.png" alt="TNO Logo" class="h-8 w-auto p-1">
-          TNO<span class="text-[var(--accent)]">Studio</span>
+        <a href="index.html" class="flex items-center text-xl font-bold text-[var(--primary)] tracking-wide space-x-3">
+          <img src="logo.png" alt="TNO Logo" class="h-8 w-8 p-1 rounded-full object-contain">
+          <span>TNO<span class="text-[var(--accent)]">Studio</span></span>
         </a>
 
         <!-- Desktop Menu -->
-        <nav class="hidden md:flex space-x-8 text-[var(--primary)] font-medium">
+        <nav class="hidden md:flex space-x-8 text-[var(--primary)] font-medium items-center">
           <a href="index.html" class="hover:text-[var(--accent)] transition">Home</a>
-          <a href="index.html#services" class="hover:text-[var(--accent)] transition">Services</a>
-          <a href="index.html#contact" class="hover:text-[var(--accent)] transition">Contact</a>
+          <a href="#programs" class="hover:text-[var(--accent)] transition">Programs</a>
+          <a href="photography.html" class="hover:text-[var(--accent)] transition">Photography</a>
+          <a href="#contact" class="hover:text-[var(--accent)] transition">Contact</a>
         </nav>
 
         <!-- Mobile Toggle -->
         <div class="md:hidden">
-          <button id="menu-btn" class="focus:outline-none">
-            <i class="fas fa-bars text-2xl text-[var(--primary)]"></i>
+          <button id="menu-btn" class="focus:outline-none p-2">
+            <i id="menu-icon" class="fas fa-bars text-2xl text-[var(--primary)]"></i>
           </button>
         </div>
       </div>
     </div>
 
     <!-- Mobile Menu -->
-    <div id="mobile-menu" class="md:hidden hidden px-4 pt-2 pb-4 bg-white shadow">
+    <div id="mobile-menu" class="md:hidden hidden px-4 pt-2 pb-4 bg-white/95 border-t">
       <a href="index.html" class="block py-2 text-[var(--primary)] hover:text-[var(--accent)]">Home</a>
+      <a href="#programs" class="block py-2 text-[var(--primary)] hover:text-[var(--accent)]">Programs</a>
       <a href="photography.html" class="block py-2 text-[var(--primary)] hover:text-[var(--accent)]">Photography</a>
       <a href="#contact" class="block py-2 text-[var(--primary)] hover:text-[var(--accent)]">Contact</a>
     </div>
   </header>
 
-  <!-- Video Background -->
-  <video autoplay muted loop class="video-bg">
-    <source src="...................." type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
+  <!-- Main Content -->
+  <main class="content pt-28">
 
-  <!-- Overlay -->
-  <div class="overlay"></div>
-<!-- Main Content -->
-<section class="content py-24 px-6 min-h-screen flex flex-col items-center" data-aos="fade-up">
-    <h1 class="text-4xl font-bold mb-8 text-center">Music Production</h1>
-  
-    <!-- Audio Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl w-full mb-8">
-      <div class="bg-white rounded-lg shadow-lg p-4" data-aos="zoom-in">
-        <h2 class="text-lg font-semibold mb-2">Ambient Forest</h2>
-        <audio controls class="w-full">
-          <source src="audio/forest.mp3" type="audio/mpeg">
-          Your browser does not support the audio element.
-        </audio>
+    <!-- Hero -->
+    <section class="py-12 px-6 text-center">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-4 text-red-500 shadow-[2px_2px_8px_rgba(0,0,0,0.9)]">
+  Inspire. Learn. Achieve.
+</h1>
+
+        <p class="text-lg md:text-xl text-black/90 mb-6 max-w-3xl mx-auto">At <span class="font-semibold">Polar / Tasbir Nepal Official</span>, we nurture ambitions — whether your child dreams of engineering, art, entrepreneurship, or music production. Explore our signature programs designed to spark curiosity & build real skills.</p>
+
+        <div class="flex justify-center gap-4">
+          <a href="#programs" class="inline-flex items-center gap-2 bg-[var(--accent)] text-white px-5 py-3 rounded-2xl font-semibold shadow-lg hover:brightness-95 transition">
+            Explore Programs <i class="fas fa-chevron-right text-sm"></i>
+          </a>
+          <a href="#contact" class="inline-flex items-center gap-2 bg-white/90 text-[var(--primary)] px-5 py-3 rounded-2xl font-semibold shadow hover:translate-y-0.5 transition">
+            Enroll Now
+          </a>
+        </div>
       </div>
-  
-      <div class="bg-white rounded-lg shadow-lg p-4" data-aos="zoom-in" data-aos-delay="100">
-        <h2 class="text-lg font-semibold mb-2">City Street</h2>
-        <audio controls class="w-full">
-          <source src="audio/city.mp3" type="audio/mpeg">
-          Your browser does not support the audio element.
-        </audio>
+    </section>
+
+    <!-- Music Production Section (your existing content) -->
+    <section class="py-8 px-6 min-h-[40vh]">
+      <div class="max-w-6xl mx-auto bg-white/80 rounded-2xl p-8 soft-shadow">
+        <h2 class="text-3xl font-bold mb-6">Music Production</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <div class="bg-white rounded-lg p-4 soft-shadow" data-aos="zoom-in">
+            <div class="card-accent"></div>
+            <h3 class="text-lg font-semibold mb-2">Ambient Forest</h3>
+            <audio controls class="w-full">
+              <source src="audio/forest.mp3" type="audio/mpeg">
+              Your browser does not support the audio element.
+            </audio>
+          </div>
+
+          <div class="bg-white rounded-lg p-4 soft-shadow" data-aos="zoom-in" data-aos-delay="100">
+            <div class="card-accent"></div>
+            <h3 class="text-lg font-semibold mb-2">City Street</h3>
+            <audio controls class="w-full">
+              <source src="audio/city.mp3" type="audio/mpeg">
+              Your browser does not support the audio element.
+            </audio>
+          </div>
+
+          <div class="bg-white rounded-lg p-4 soft-shadow" data-aos="zoom-in" data-aos-delay="200">
+            <div class="card-accent"></div>
+            <h3 class="text-lg font-semibold mb-2">Mountain Wind</h3>
+            <audio controls class="w-full">
+              <source src="audio/wind.mp3" type="audio/mpeg">
+              Your browser does not support the audio element.
+            </audio>
+          </div>
+        </div>
       </div>
-  
-      <div class="bg-white rounded-lg shadow-lg p-4" data-aos="zoom-in" data-aos-delay="200">
-        <h2 class="text-lg font-semibold mb-2">Mountain Wind</h2>
-        <audio controls class="w-full">
-          <source src="audio/wind.mp3" type="audio/mpeg">
-          Your browser does not support the audio element.
-        </audio>
+    </section>
+
+    <!-- Signature Programs (Best subjects) -->
+    <section id="programs" class="py-16 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-10">
+          <h2 class="text-3xl md:text-4xl font-extrabold">Signature Programs</h2>
+          <p class="text-md text-[var(--muted)] mt-2 max-w-3xl mx-auto">Curated subjects that help students develop strong foundations, creative thinking, and career-ready skills. Built for curiosity, confidence, and real-world success.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+          <!-- Card: Music & Audio Production -->
+          <article class="bg-white rounded-2xl p-6 soft-shadow hover:scale-[1.01] transition" data-aos="fade-up" data-aos-delay="60">
+            <div class="flex items-center justify-between">
+              <div>
+                <h3 class="text-xl font-semibold">Music & Audio Production</h3>
+                <p class="text-sm text-[var(--muted)] mt-1">Recording, mixing, and creative sound design using modern studio tools.</p>
+              </div>
+              <div class="text-[var(--accent)] text-3xl">
+                <i class="fas fa-music"></i>
+              </div>
+            </div>
+            <div class="mt-4 flex gap-2 text-sm">
+              <span class="px-2 py-1 rounded-full bg-gray-100">Recording</span>
+              <span class="px-2 py-1 rounded-full bg-gray-100">Mixing</span>
+            </div>
+            <div class="mt-5 flex justify-between items-center">
+              <a href="#contact" class="text-sm font-semibold">Studio</a>
+              <button class="px-4 py-2 rounded-full bg-[var(--accent)] text-white text-sm">Enroll</button>
+            </div>
+          </article>
+        </div>
+
+        <!-- Quick benefits / Why choose us -->
+        <div class="mt-12 max-w-4xl mx-auto text-center text-[var(--muted)]">
+          <p><strong>Why choose these programs?</strong> Real projects • Small class sizes • Industry-aligned curriculum • Competitions & showcases</p>
+        </div>
       </div>
-  
-      <!-- Add more audio tracks similarly -->
+    </section>
+
+    <!-- Contact / CTA -->
+    <section id="contact" class="py-12 px-6">
+      <div class="max-w-4xl mx-auto bg-gradient-to-r from-white to-white/90 rounded-2xl p-8 soft-shadow flex flex-col md:flex-row gap-6 items-center justify-between">
+        <div>
+          <h3 class="text-2xl font-bold">Ready to join?</h3>
+          <p class="text-sm text-[var(--muted)] mt-1">Contact admissions to reserve a spot — scholarships are available for high performers.</p>
+        </div>
+
+        <div class="flex gap-3">
+          <a href="tel:+977-1234567890" class="inline-flex items-center gap-2 px-4 py-3 rounded-full border font-semibold">
+            <i class="fas fa-phone"></i> Call Us
+          </a>
+          <a href="mailto:info@tasbirnepal.com" class="inline-flex items-center gap-2 px-4 py-3 rounded-full bg-[var(--accent)] text-white font-semibold">
+            <i class="fas fa-envelope"></i> Email
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 text-white py-10 px-6">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
+      <div class="flex items-center space-x-3 text-center md:text-left">
+        <div class="bg-white rounded-full p-2 h-12 w-12 flex items-center justify-center">
+          <img src="logo.png" alt="TNO Logo" class="h-8 w-8 object-contain">
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold">Tasbir Nepal Official</h2>
+          <p class="text-sm text-white/90 mt-1">&copy; 2025 All rights reserved</p>
+        </div>
+      </div>
+
+      <div class="hidden sm:flex gap-6 text-sm text-white font-bold">
+        <a href="index.html" class="hover:text-[var(--accent)] transition">Home</a>
+        <a href="photography.html" class="hover:text-[var(--accent)] transition">Photography</a>
+        <a href="#contact" class="hover:text-[var(--accent)] transition">Contact</a>
+      </div>
+
+      <div class="flex space-x-4 text-2xl text-white">
+        <a href="https://facebook.com" target="_blank" class="hover:text-[var(--accent)] transition"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://instagram.com" target="_blank" class="hover:text-[var(--accent)] transition"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.tiktok.com/@tasbirnepalofficial" target="_blank" class="hover:text-[var(--accent)] transition"><i class="fab fa-tiktok"></i></a>
+        <a href="https://youtube.com" target="_blank" class="hover:text-[var(--accent)] transition"><i class="fab fa-youtube"></i></a>
+        <a href="https://linkedin.com" target="_blank" class="hover:text-[var(--accent)] transition"><i class="fab fa-linkedin"></i></a>
+      </div>
     </div>
-  </section>
-  
+  </footer>
 
-<!-- Footer -->
-<footer class="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 text-white py-10 px-6">
-  <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
-    
-    <!-- Logo and Tagline -->
-<div class="flex items-center space-x-3 text-center md:text-left">
-  <div class="bg-white rounded-full p-2 h-12 w-12 flex items-center justify-center">
-    <img src="logo.png" alt="TNO Logo" class="h-8 w-8 object-contain">
-  </div>
-  <div>
-    <h2 class="text-2xl font-bold">Tasbir Nepal Official</h2>
-    <p class="text-sm text-white mt-1">&copy; 2025 All rights reserved</p>
-  </div>
-</div>
-
-
-    <!-- Navigation Links -->
-<div class="hidden sm:flex gap-6 text-sm text-white font-bold">
-  <a href="index.html" class="hover:text-[var(--accent)] transition">Home</a>
-  <a href="photography.html" class="hover:text-[var(--accent)] transition">Photography</a>
-  <a href="#contact" class="hover:text-[var(--accent)] transition">Contact</a>
-</div>
-
-
-    <!-- Social Icons -->
-    <div class="flex space-x-4 text-2xl text-white">
-      <a href="https://facebook.com" target="_blank" class="hover:text-[var(--accent)] transition"><i class="fab fa-facebook-f"></i></a>
-      <a href="https://instagram.com" target="_blank" class="hover:text-[var(--accent)] transition"><i class="fab fa-instagram"></i></a>
-      <a href="https://www.tiktok.com/@tasbirnepalofficial?is_from_webapp=1&sender_device=pc" target="_blank" class="hover:text-[var(--accent)] transition"><i class="fab fa-tiktok"></i></a>
-      <a href="https://youtube.com" target="_blank" class="hover:text-[var(--accent)] transition"><i class="fab fa-youtube"></i></a>
-      <a href="https://linkedin.com" target="_blank" class="hover:text-[var(--accent)] transition"><i class="fab fa-linkedin"></i></a>
-    </div>
-    
-  </div>
-</footer>
-
-  <!-- AOS Init -->
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script>
-    AOS.init();
+    // Init AOS
+    AOS.init({ once: true, duration: 700 });
+
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+
+    menuBtn.addEventListener('click', () => {
+      const isOpen = !mobileMenu.classList.contains('mobile-menu-open');
+      if (isOpen) {
+        mobileMenu.classList.add('mobile-menu-open');
+        menuIcon.className = 'fas fa-times text-2xl text-[var(--primary)]';
+      } else {
+        mobileMenu.classList.remove('mobile-menu-open');
+        menuIcon.className = 'fas fa-bars text-2xl text-[var(--primary)]';
+      }
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!menuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+        mobileMenu.classList.remove('mobile-menu-open');
+        menuIcon.className = 'fas fa-bars text-2xl text-[var(--primary)]';
+      }
+    });
   </script>
+
 </body>
 </html>
